@@ -1,0 +1,9 @@
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\bin\Debug\sudoku cs.exe
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\bin\Debug\sudoku cs.pdb
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku cs.csprojAssemblyReference.cache
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku_cs.Form1.resources
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku_cs.Properties.Resources.resources
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku cs.csproj.GenerateResource.cache
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku cs.csproj.CoreCompileInputs.cache
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku cs.exe
+C:\Users\Matu\Desktop\Tp Tyla\Sodoku\C#\sudoku cs\obj\Debug\sudoku cs.pdb
