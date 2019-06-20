@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,61 @@ namespace sudoku_cs
             InitializeComponent();
             Load += Form1_Load;
             btnNew.Click += btnNew_Click;
+            DataGridView1.CellEndEdit+= validacion;
             btnSolution.Click += btnSolution_Click;
             DataGridView1.Paint += DataGridView1_Paint;
             ComboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             game.ShowClues += game_ShowClues;
             game.ShowSolution += game_ShowSolution;
+        }
+
+        private void validacion(System.Object sender, System.EventArgs e)
+        {
+            if (DataGridView1.SelectedCells[0].Value == null) return;
+            string numeroIngresado =DataGridView1.SelectedCells[0].Value.ToString();
+            string[] posiblesValores= new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            if (!(posiblesValores.Contains(numeroIngresado)))
+            {
+                DataGridView1.SelectedCells[0].Value = null;
+                return;
+            }
+
+            int fila = DataGridView1.SelectedCells[0].RowIndex;
+            int columna = DataGridView1.SelectedCells[0].ColumnIndex;
+
+
+            for (int r = 0; r < 9; r++)
+            {
+                if (DataGridView1.Rows[r].Cells[columna].Value == null) continue;
+                if (r == fila)
+                {
+                    continue;
+                }                
+                if (DataGridView1.Rows[r].Cells[columna].Value.ToString() == numeroIngresado)
+                {                    
+                    DataGridView1.SelectedCells[0].Value = null;
+                    return;
+                }
+                
+            }
+            for (int c = 0; c < 9; c++)
+            {
+                if (DataGridView1.Rows[fila].Cells[c].Value == null) continue;
+                if (c == columna)
+                {
+                    continue;
+                }
+
+                if (DataGridView1.Rows[fila].Cells[c].Value.ToString() == numeroIngresado)
+                {
+                    DataGridView1.SelectedCells[0].Value = null;
+                    return;
+                }
+
+            }
+
+
+            //Debug.WriteLine(DataGridView1.SelectedCells[0].Value.ToString());
         }
 
         private void Form1_Load(System.Object sender, System.EventArgs e)
