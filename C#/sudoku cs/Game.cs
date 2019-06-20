@@ -5,20 +5,32 @@ using System.Text;
 
 namespace sudoku_cs
 {
+       //declaro la clase Game 
     public class Game
     {
-
+        //declaracion de eventos 
         public event ShowCluesEventHandler ShowClues;
         public delegate void ShowCluesEventHandler(int[][] grid);
         public event ShowSolutionEventHandler ShowSolution;
         public delegate void ShowSolutionEventHandler(int[][] grid);
 
+        /* Declaro 3 array de tipo lista de Enteros de tamaño 9 , la "lista" de enteros permite metodos
+        adicionales a los de los array basicos. 
+        */
         private List<int>[] HRow = new List<int>[9];
         private List<int>[] VRow = new List<int>[9];
         private List<int>[] ThreeSquare = new List<int>[9];
 
+        /* Declaro un jagged array de  de tipo Entero de tamaño 9, un jagged array es un "array de arrays"
+        el primer bracket indica el tamaño del jagged array, 9 en este caso indicando que guarda hasta 9 "arrays" 
+        el segundo bracket indica la dimensionalidad, en este caso son array de 1 sola dimension, si fueran de mas 
+        se indicarian con comas    private int[2][ , ] guardiara 2 array de 2 dimensiones cada uno
+        
+             */
         private int[][] grid = new int[9][];
 
+        //Declaro  generador de numeros aleatorios https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8 
+        // 
         private Random r;
         public void NewGame(Random rn)
         {
@@ -26,6 +38,7 @@ namespace sudoku_cs
             createNewGame();
         }
 
+        //Inicializo las  listas y el array creado anteriormente
         private void initializeLists()
         {
             for (int x = 0; x <= 8; x++)
@@ -66,8 +79,8 @@ namespace sudoku_cs
                     }                    
                 }                                
             };
-            break2:
-
+        break2:
+    
             if (ShowClues != null)
             {
                 ShowClues(grid);
@@ -75,7 +88,7 @@ namespace sudoku_cs
 
         }
 
-
+        //Muestro la solucion al sudoku
         public void showGridSolution()
         {
             if (ShowSolution != null)
