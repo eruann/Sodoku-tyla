@@ -15,6 +15,8 @@ namespace sudoku_cs
 
         private Game game = new Game();
         private Random r = new Random();
+        int fila;
+        int columna;
 
         public Form1()
         {
@@ -32,16 +34,17 @@ namespace sudoku_cs
         private void validacion(System.Object sender, System.EventArgs e)
         {
             if (DataGridView1.SelectedCells[0].Value == null) return;
-            string numeroIngresado =DataGridView1.SelectedCells[0].Value.ToString();
-            string[] posiblesValores= new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            string numeroIngresado = DataGridView1.SelectedCells[0].Value.ToString();
+            string[] posiblesValores = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             if (!(posiblesValores.Contains(numeroIngresado)))
             {
                 DataGridView1.SelectedCells[0].Value = null;
                 return;
             }
 
-            int fila = DataGridView1.SelectedCells[0].RowIndex;
-            int columna = DataGridView1.SelectedCells[0].ColumnIndex;
+            fila = DataGridView1.SelectedCells[0].RowIndex;
+
+            columna = DataGridView1.SelectedCells[0].ColumnIndex;
 
 
             for (int r = 0; r < 9; r++)
@@ -50,13 +53,13 @@ namespace sudoku_cs
                 if (r == fila)
                 {
                     continue;
-                }                
+                }
                 if (DataGridView1.Rows[r].Cells[columna].Value.ToString() == numeroIngresado)
-                {                    
+                {
                     DataGridView1.SelectedCells[0].Value = null;
                     return;
                 }
-                
+
             }
             for (int c = 0; c < 9; c++)
             {
@@ -74,8 +77,80 @@ namespace sudoku_cs
 
             }
 
+            if (fila <= 2 && columna <=2 )
+            {
+                ValidarCuadrado(0,0,2,2,numeroIngresado);
+                return;
+            }
+            if ( fila >= 3 && fila <= 5  && columna <= 2)
+            {
+                ValidarCuadrado(3, 0, 5, 2, numeroIngresado);
+                return;
+            }
+            if (fila >= 6 && columna <= 2)
+            {
+                ValidarCuadrado(6, 0, 8, 2, numeroIngresado);
+                return;
+            }
 
-            //Debug.WriteLine(DataGridView1.SelectedCells[0].Value.ToString());
+
+
+            if (fila <= 2 && columna <= 5 && columna >= 3)
+            {
+                ValidarCuadrado(0, 3, 2, 5, numeroIngresado);
+                return;
+            }
+            if (fila >= 3 && fila <= 5 && columna >= 3 && columna <= 5)
+            {
+                ValidarCuadrado(3, 3, 5, 5, numeroIngresado);
+                return;
+            }
+            if (fila >= 6 && columna >= 3 && columna <= 5)
+            {
+                ValidarCuadrado(6, 3, 8, 5, numeroIngresado);
+                return;
+            }
+
+
+
+            if (fila <= 2 && columna >= 6)
+            {
+                ValidarCuadrado(0, 6, 2, 8, numeroIngresado);
+                return;
+            }
+            if (fila >= 3 && fila <= 5 && columna >= 6)
+            {
+                ValidarCuadrado(3, 6, 5, 8, numeroIngresado);
+                return;
+            }
+            if (fila >= 6 && columna >= 6 )
+            {
+                ValidarCuadrado(6, 6, 8, 8, numeroIngresado);
+                return;
+            }
+
+
+        }
+
+        private void ValidarCuadrado(int inicioR , int inicioC, int finR, int finC, string numeroIngresado)
+        {
+            for (int r = inicioR; r <= finR; r++)
+            {
+                for (int c = inicioC; c <= finC; c++)
+                {
+                    if (DataGridView1.Rows[r].Cells[c].Value == null) continue;
+                    if ((r == fila) && (c == columna))
+                    {
+                        continue;
+                    }
+                    if (DataGridView1.Rows[r].Cells[c].Value.ToString() == numeroIngresado)
+                    {
+                        DataGridView1.SelectedCells[0].Value = null;
+                        return;
+                    }
+                }
+
+            }
         }
 
         private void Form1_Load(System.Object sender, System.EventArgs e)
