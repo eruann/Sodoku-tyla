@@ -185,8 +185,10 @@ namespace sudoku_cs
 
         public void game_ShowClues(int[][] grid)
         {
+        
             for (int y = 0; y <= 8; y++)
             {
+                
                 List<int> cells = new List<int>(new int[] {1,2,3,4,5,6,7,8,9});
                 for (int c = 1; c <= 9 - (5 - ComboBox1.SelectedIndex); c++)
                 {
@@ -213,10 +215,28 @@ namespace sudoku_cs
 
         public void game_ShowSolution(int[][] grid)
         {
+           // Console.Clear();
             for (int y = 0; y <= 8; y++)
             {
+                /*
+                var Exportar  = new System.Text.StringBuilder();
+                Exportar.Append("grid[" + y + "] = new int[] {");
+                */
                 for (int x = 0; x <= 8; x++)
                 {
+                    /*
+                    if (x == 8)
+                    {
+                     
+                        Exportar.Append(grid[y][x].ToString() + "}; //Fila:" + y);
+                        
+                
+                    }
+                    else
+                    {
+                     Exportar.Append(grid[y][x].ToString() + ",");
+                    }
+                    */
                     if (DataGridView1.Rows[y].Cells[x].Style.ForeColor == Color.Black)
                     {
                         if (string.IsNullOrEmpty(DataGridView1.Rows[y].Cells[x].Value.ToString()))
@@ -234,6 +254,8 @@ namespace sudoku_cs
                         }
                     }
                 }
+
+               // Console.WriteLine(Exportar);
             }
         }
 
