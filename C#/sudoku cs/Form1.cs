@@ -22,8 +22,8 @@ namespace sudoku_cs
         {
             InitializeComponent();
             Load += Form1_Load;
-            btnNew.Click += btnNew_Click;
-            DataGridView1.CellEndEdit+= validacion;
+            btnNew.Click += btnNew_Click;            
+            DataGridView1.CellValueChanged += validacion;
             btnSolution.Click += btnSolution_Click;
             DataGridView1.Paint += DataGridView1_Paint;
             ComboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
