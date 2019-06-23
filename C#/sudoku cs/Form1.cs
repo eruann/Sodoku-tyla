@@ -239,7 +239,7 @@ namespace sudoku_cs
                     */
                     if (DataGridView1.Rows[y].Cells[x].Style.ForeColor == Color.Black)
                     {
-                        if (string.IsNullOrEmpty(DataGridView1.Rows[y].Cells[x].Value.ToString()))
+                        if (DataGridView1.Rows[y].Cells[x].Value == null)
                         {
                             DataGridView1.Rows[y].Cells[x].Style.ForeColor = Color.Blue;
                             DataGridView1.Rows[y].Cells[x].Value = grid[y][x];
