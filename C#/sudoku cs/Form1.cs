@@ -17,7 +17,7 @@ namespace sudoku_cs
         private Random r = new Random();
         int fila;
         int columna;
-
+        bool MostrarSolucionFlag;
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace sudoku_cs
 
         private void validacion(System.Object sender, System.EventArgs e)
         {
+       
             if (DataGridView1.SelectedCells[0].Value == null) return;
             string numeroIngresado = DataGridView1.SelectedCells[0].Value.ToString();
             string[] posiblesValores = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -43,9 +44,7 @@ namespace sudoku_cs
             }
 
             fila = DataGridView1.SelectedCells[0].RowIndex;
-
             columna = DataGridView1.SelectedCells[0].ColumnIndex;
-
 
             for (int r = 0; r < 9; r++)
             {
@@ -75,6 +74,13 @@ namespace sudoku_cs
                     return;
                 }
 
+            }
+
+            if (Estacompleto() && !MostrarSolucionFlag)
+            {
+                string message = "Felicidades completo el sudoku";
+                MessageBox.Show(message);
+                return;
             }
 
             if (fila <= 2 && columna <=2 )
@@ -128,10 +134,34 @@ namespace sudoku_cs
                 ValidarCuadrado(6, 6, 8, 8, numeroIngresado);
                 return;
             }
-
+      
 
         }
 
+        private bool Estacompleto()
+        {
+            for (int i = 0; i < DataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < DataGridView1.Rows[i].Cells.Count; j++)
+                {
+
+                    if (DataGridView1.Rows[i].Cells[j].Value != null)
+                    {
+                        string Value = DataGridView1.Rows[i].Cells[j].Value.ToString();
+
+                        if (StringExtensions.IsNullOrWhiteSpace(Value))
+                        {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }   
+                }
+            }
+            return true;
+
+        }
         private void ValidarCuadrado(int inicioR , int inicioC, int finR, int finC, string numeroIngresado)
         {
             for (int r = inicioR; r <= finR; r++)
@@ -162,7 +192,9 @@ namespace sudoku_cs
 
         private void btnNew_Click(System.Object sender, System.EventArgs e)
         {
+           
             game.NewGame(r);
+            MostrarSolucionFlag = false;
         }
 
         private void DataGridView1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -215,7 +247,8 @@ namespace sudoku_cs
 
         public void game_ShowSolution(int[][] grid)
         {
-           // Console.Clear();
+            MostrarSolucionFlag = true;
+            // Console.Clear();
             for (int y = 0; y <= 8; y++)
             {
                 /*
@@ -264,5 +297,23 @@ namespace sudoku_cs
 
         }        
 
+    }
+    //agrego la clase stringextensions ya que .net 3.5 no tiene el metodo "IsNullOrWhiteSpace"
+    public static class StringExtensions
+    {
+        public static bool IsNullOrWhiteSpace(this string value)
+        {
+            if (value != null)
+            {
+                for (int i = 0; i < value.Length; i++)
+                {
+                    if (!char.IsWhiteSpace(value[i]))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
