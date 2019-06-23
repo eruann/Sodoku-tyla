@@ -22,15 +22,22 @@ namespace sudoku_cs
         {
             InitializeComponent();
             Load += Form1_Load;
-            btnNew.Click += btnNew_Click;            
+            btnNew.Click += btnNew_Click;
             DataGridView1.CellEndEdit += validacion;
+            DataGridView1.CellLeave += ValidarMouse;
             btnSolution.Click += btnSolution_Click;
             DataGridView1.Paint += DataGridView1_Paint;
             ComboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             game.ShowClues += game_ShowClues;
             game.ShowSolution += game_ShowSolution;
-        }
 
+        }
+  
+          // fix celledit end cuando cambia de celda el mouse
+        private void ValidarMouse(object sender, DataGridViewCellEventArgs e)
+        {      
+            DataGridView1.EndEdit();
+        }
         private void validacion(System.Object sender, System.EventArgs e)
         {
        
@@ -295,8 +302,9 @@ namespace sudoku_cs
         private void btnNew_Click_1(object sender, EventArgs e)
         {
 
-        }        
+        }
 
+       
     }
     //agrego la clase stringextensions ya que .net 3.5 no tiene el metodo "IsNullOrWhiteSpace"
     public static class StringExtensions

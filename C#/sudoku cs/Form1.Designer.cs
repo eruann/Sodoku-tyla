@@ -108,7 +108,7 @@
             this.DataGridView1.RowHeadersVisible = false;
             this.DataGridView1.Size = new System.Drawing.Size(228, 201);
             this.DataGridView1.TabIndex = 5;
-            // 
+             // 
             // Column1
             // 
             this.Column1.HeaderText = "Column1";
