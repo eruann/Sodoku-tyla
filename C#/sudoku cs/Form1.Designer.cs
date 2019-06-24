@@ -58,12 +58,12 @@
             // 
             this.ComboBox1.FormattingEnabled = true;
             this.ComboBox1.Items.AddRange(new object[] {
-            "Fácil",
-            "Medio",
-            "Difícil"});
-            this.ComboBox1.Location = new System.Drawing.Point(66, 8);
+            "Muchas",
+            "Algunas",
+            "Pocas"});
+            this.ComboBox1.Location = new System.Drawing.Point(53, 8);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(174, 21);
+            this.ComboBox1.Size = new System.Drawing.Size(187, 21);
             this.ComboBox1.TabIndex = 8;
             // 
             // Label1
@@ -71,9 +71,9 @@
             this.Label1.AutoSize = true;
             this.Label1.Location = new System.Drawing.Point(9, 11);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(51, 13);
+            this.Label1.Size = new System.Drawing.Size(38, 13);
             this.Label1.TabIndex = 7;
-            this.Label1.Text = "Dificultad:";
+            this.Label1.Text = "Pistas:";
             // 
             // btnNew
             // 
