@@ -5,3 +5,5 @@
 /.vs
 /C#/.vs/sudoku cs/v16
 /C#/.vs/sudoku cs/FileContentIndex/3afaaab7-60eb-4b92-93ef-340f659b867c.vsidx
+/C#/.vs/sudoku cs/FileContentIndex/read.lock
+/C#/sudoku cs/obj/Debug/sudoku cs.csproj.AssemblyReference.cache
