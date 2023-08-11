@@ -8,17 +8,19 @@ namespace sudoku_cs
        //declaro la clase Game 
     public class Game
     {
-        //declaracion de eventos y handlers
+        //declaracion de eventos 
         public event ShowCluesEventHandler ShowClues;
         public delegate void ShowCluesEventHandler(int[][] grid);
         public event ShowSolutionEventHandler ShowSolution;
         public delegate void ShowSolutionEventHandler(int[][] grid);
 
         /* Declaro 3 array de tipo lista de Enteros de tamaño 9 , la "lista" de enteros permite metodos
-        adicionales a los de los array basicos, en especial me interesa el metodo "intersect" que viene del namespace linq
-        (el cual permite agregarle a c# la funcionalidad de hacer "queries" orientadas al lengaje de programacion) y que
+        adicionales a los de los array basicos, en especial me interesa el metodo "intersect" que viene (del namespace linq
+        el cual permite agregarle a c# la funcionalidad de hacer "queries" orientadas al lengaje de programacion)
         trae un subset de elementos que estan en ambos arrays, por lo que permite chequear si un elemento esta repetido
-        Declaraciones necesarias para usar el generador de sudokus , por lo que se dejan a modo de documentación
+        */
+        /*
+        Declaraciones necesarias para usar el generador de sudokus
         private List<int>[] HRow = new List<int>[9];
         private List<int>[] VRow = new List<int>[9];
         private List<int>[] ThreeSquare = new List<int>[9];
@@ -26,10 +28,10 @@ namespace sudoku_cs
 
         /* Declaro un jagged array de  de tipo Entero de tamaño 9, un jagged array es un "array de arrays"
         el primer bracket indica el tamaño del jagged array, 9 en este caso indicando que guarda hasta 9 "arrays" 
-        el segundo bracket indica la dimensionalidad, en este caso son array de 1 sola dimensión, si fueran de mas 
-        se indicarían con comas    private int[2][ , ] guardaría 2 array de 2 dimensiones cada uno
-        En este caso el Jagged array contendrá cada fila del sudoku y cada elemento de los array de fila serán una celda
-          */
+        el segundo bracket indica la dimensionalidad, en este caso son array de 1 sola dimension, si fueran de mas 
+        se indicarian con comas    private int[2][ , ] guardiara 2 array de 2 dimensiones cada uno
+        En este caso el Jagged array contendra cada fila del sudoku y cada elemento de los array de fila seran una celda
+             */
         private int[][] grid = new int[9][];
  
         /*
@@ -44,7 +46,7 @@ namespace sudoku_cs
             createNewGame();
         }
 
-        /*Inicializo las  listas y el array creado anteriormente.Este paso se mantiene  por buena practica, 
+        /*Inicializo las  listas y el array creado anteriormente.Este paso se mantiene  por buena practica, 7
         ya que no siendo necesaria la generacion automatica, se podria inicializar y cargar datos en un mismo paso
         */
         private void initializeLists()
@@ -52,15 +54,14 @@ namespace sudoku_cs
             
             for (int x = 0; x <= 8; x++)
             {
-             
+                //Inicilizo los array previamente creados, 
                 /*
-                Esta inicializacion aplica para el generador de sudokus, se deja a modo de documentación
                 HRow[x] = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
                 VRow[x] = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
                 ThreeSquare[x] = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
                 */
-
                 //inicializo el jagged array grid, poniendo en cada posicion un array de 9 posiciones vacio
+
                 int[] row = new int[9];
                 grid[x] = row;
             }
@@ -187,49 +188,47 @@ namespace sudoku_cs
             }
 
             /*
-            En resumidas cuentas, el generador de sudokus trabaja por fuerza bruta  
-             "int si = (y / 3) * 3 + (x / 3);" ubica la posición dentro de cada uno de los elementos de los cuadrados
-             de 3x3 , mientras que "y" recorre las filas y "x" las columnas. Inicialmente el array "grid" se encuentra lleno
-             con los números del 1 al 9 de la inicialización, por lo que el algoritmo va recorriendo y evaluando la Intersección
-             los 3 arrays (Filas, columnas, cuadrados 3x3) y removiendo los repetidos. 
+            En resumidas cuentas el generador de sudokus trabaja por fuerza bruta  
+             "int si = (y / 3) * 3 + (x / 3);" ubica la posicion dentro de cada uno de los elementos de los cuadrados
+             de 3x3 , mientras que y recorre las filas y x las columnas. Inicialmente array "grid" se encuentra lleno
+             con los numeros del 1 al 9 de la inicilizacion, por lo que la formula va recorriendo e intersectando cada 
+             elemento de los 3 arrays (Filas, columnas, cuadrados 3x3) y removiendo los repetidos. 
              luego reemplaza el numero por otro aleatorio  y vuelve a comparar todos los elementos hasta que cada casilla
-             esta completa por un numero único y "útil" es decir de acuerdo a las reglas del sudoku
-             esta estrategia si bien es utilizable utiliza sentencias "goto" para resolver el problema, por una cuestión
-             de buena programación en general se desaconseja el uso de este tipo de sentencias. por lo cual se 
-             reemplaza con 10 sudokus estáticos.
+             esta completa por un numero unico y "util" es decir de acuerdo a las reglas del sudoku
+             esta estrategia si bien es utilizable utiliza sentencias "goto" para resolver el problema, por una cuestion
+             de buena programacion en general se desaconseja el uso de este tipo de sentencias. por lo cual se 
+             reemplaza con 10 sudokus estaticos.
              */
-            //Generador de sudokus
-            /*
-             
-                        while (true)
+/*
+            while (true)
+            {
+            break1:
+                initializeLists();
+                for (int y = 0; y <= 8; y++)
+                {
+                    for (int x = 0; x <= 8; x++)
+                    {
+                        int si = (y / 3) * 3 + (x / 3);
+                        int[] useful = HRow[y].Intersect(VRow[x]).Intersect(ThreeSquare[si]).ToArray();
+                        if (useful.Count() == 0)
                         {
-                        break1:
-                            initializeLists();
-                            for (int y = 0; y <= 8; y++)
-                            {
-                                for (int x = 0; x <= 8; x++)
-                                {
-                                    int si = (y / 3) * 3 + (x / 3);
-                                    int[] useful = HRow[y].Intersect(VRow[x]).Intersect(ThreeSquare[si]).ToArray();
-                                    if (useful.Count() == 0)
-                                    {
-                                        goto break1;
-                                    }
-                                    int randomNumber = useful[this.r.Next(0, useful.Count())];
-                                    HRow[y].Remove(randomNumber);
-                                    VRow[x].Remove(randomNumber);
-                                    ThreeSquare[si].Remove(randomNumber);
-                                    grid[y][x] = randomNumber;
-                                    if (y == 8 & x == 8)
-                                    {
-                                        goto break2;
-                                    }
-                                }                    
-                            }                                
-                        };
-
-                    break2:
-              */
+                            goto break1;
+                        }
+                        int randomNumber = useful[this.r.Next(0, useful.Count())];
+                        HRow[y].Remove(randomNumber);
+                        VRow[x].Remove(randomNumber);
+                        ThreeSquare[si].Remove(randomNumber);
+                        grid[y][x] = randomNumber;
+                        if (y == 8 & x == 8)
+                        {
+                            goto break2;
+                        }
+                    }                    
+                }                                
+            };
+          
+        break2:
+  */       
 
             if (ShowClues != null)
             {

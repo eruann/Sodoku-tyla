@@ -51,19 +51,19 @@
             this.btnSolution.Name = "btnSolution";
             this.btnSolution.Size = new System.Drawing.Size(75, 23);
             this.btnSolution.TabIndex = 9;
-            this.btnSolution.Text = "Solución";
+            this.btnSolution.Text = "Solution";
             this.btnSolution.UseVisualStyleBackColor = true;
             // 
             // ComboBox1
             // 
             this.ComboBox1.FormattingEnabled = true;
             this.ComboBox1.Items.AddRange(new object[] {
-            "Fácil",
-            "Medio",
-            "Difícil"});
-            this.ComboBox1.Location = new System.Drawing.Point(66, 8);
+            "Most",
+            "Medium",
+            "Least"});
+            this.ComboBox1.Location = new System.Drawing.Point(48, 8);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(174, 21);
+            this.ComboBox1.Size = new System.Drawing.Size(192, 21);
             this.ComboBox1.TabIndex = 8;
             // 
             // Label1
@@ -71,9 +71,9 @@
             this.Label1.AutoSize = true;
             this.Label1.Location = new System.Drawing.Point(9, 11);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(54, 13);
+            this.Label1.Size = new System.Drawing.Size(33, 13);
             this.Label1.TabIndex = 7;
-            this.Label1.Text = "Dificultad:";
+            this.Label1.Text = "Clues";
             // 
             // btnNew
             // 
@@ -81,7 +81,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 6;
-            this.btnNew.Text = "Nuevo";
+            this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click_1);
             // 
@@ -89,8 +89,8 @@
             // 
             this.DataGridView1.AllowUserToAddRows = false;
             this.DataGridView1.AllowUserToDeleteRows = false;
+            this.DataGridView1.AllowUserToOrderColumns = true;
             this.DataGridView1.AllowUserToResizeColumns = false;
-            this.DataGridView1.AllowUserToResizeRows = false;
             this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView1.ColumnHeadersVisible = false;
             this.DataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
