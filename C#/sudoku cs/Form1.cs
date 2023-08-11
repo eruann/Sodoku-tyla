@@ -22,22 +22,15 @@ namespace sudoku_cs
         {
             InitializeComponent();
             Load += Form1_Load;
-            btnNew.Click += btnNew_Click;
+            btnNew.Click += btnNew_Click;            
             DataGridView1.CellEndEdit += validacion;
-            DataGridView1.CellLeave += ValidarMouse;
             btnSolution.Click += btnSolution_Click;
             DataGridView1.Paint += DataGridView1_Paint;
             ComboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             game.ShowClues += game_ShowClues;
             game.ShowSolution += game_ShowSolution;
+        }
 
-        }
-  
-          // fix celledit end cuando cambia de celda el mouse
-        private void ValidarMouse(object sender, DataGridViewCellEventArgs e)
-        {      
-            DataGridView1.EndEdit();
-        }
         private void validacion(System.Object sender, System.EventArgs e)
         {
        
@@ -85,7 +78,7 @@ namespace sudoku_cs
 
             if (Estacompleto() && !MostrarSolucionFlag)
             {
-                string message = "Felicidades completó el sudoku";
+                string message = "Felicidades completo el sudoku";
                 MessageBox.Show(message);
                 return;
             }
@@ -145,7 +138,30 @@ namespace sudoku_cs
 
         }
 
-      
+        private bool Estacompleto()
+        {
+            for (int i = 0; i < DataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < DataGridView1.Rows[i].Cells.Count; j++)
+                {
+
+                    if (DataGridView1.Rows[i].Cells[j].Value != null)
+                    {
+                        string Value = DataGridView1.Rows[i].Cells[j].Value.ToString();
+
+                        if (StringExtensions.IsNullOrWhiteSpace(Value))
+                        {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }   
+                }
+            }
+            return true;
+
+        }
         private void ValidarCuadrado(int inicioR , int inicioC, int finR, int finC, string numeroIngresado)
         {
             for (int r = inicioR; r <= finR; r++)
@@ -166,31 +182,7 @@ namespace sudoku_cs
 
             }
         }
-        private bool Estacompleto()
-        {
-            for (int i = 0; i < DataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < DataGridView1.Rows[i].Cells.Count; j++)
-                {
 
-                    if (DataGridView1.Rows[i].Cells[j].Value != null)
-                    {
-                        string Value = DataGridView1.Rows[i].Cells[j].Value.ToString();
-
-                        if (StringExtensions.IsNullOrWhiteSpace(Value))
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-
-        }
         private void Form1_Load(System.Object sender, System.EventArgs e)
         {
             DataGridView1.Rows.Add(9);
@@ -255,13 +247,29 @@ namespace sudoku_cs
 
         public void game_ShowSolution(int[][] grid)
         {
-           
-            MostrarSolucionFlag = true; //evita las validaciones cuando se esta mostrando la solucion
-          
+            MostrarSolucionFlag = true;
+            // Console.Clear();
             for (int y = 0; y <= 8; y++)
             {
+                /*
+                var Exportar  = new System.Text.StringBuilder();
+                Exportar.Append("grid[" + y + "] = new int[] {");
+                */
                 for (int x = 0; x <= 8; x++)
                 {
+                    /*
+                    if (x == 8)
+                    {
+                     
+                        Exportar.Append(grid[y][x].ToString() + "}; //Fila:" + y);
+                        
+                
+                    }
+                    else
+                    {
+                     Exportar.Append(grid[y][x].ToString() + ",");
+                    }
+                    */
                     if (DataGridView1.Rows[y].Cells[x].Style.ForeColor == Color.Black)
                     {
                         if (DataGridView1.Rows[y].Cells[x].Value == null)
@@ -279,15 +287,16 @@ namespace sudoku_cs
                         }
                     }
                 }
+
+               // Console.WriteLine(Exportar);
             }
         }
 
         private void btnNew_Click_1(object sender, EventArgs e)
         {
 
-        }
+        }        
 
-       
     }
     //agrego la clase stringextensions ya que .net 3.5 no tiene el metodo "IsNullOrWhiteSpace"
     public static class StringExtensions
